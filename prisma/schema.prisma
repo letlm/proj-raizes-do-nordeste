@@ -1,0 +1,259 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum tipo_usuarios {
+  ADMIN
+  CLIENTE
+  ATENDENTE
+  COZINHA
+  GERENTE
+}
+
+enum tipo_status {
+  AGUARDANDO_PAGAMENTO
+  CONFIRMADO
+  EM_PREPARO
+  PRONTO
+  ENTREGUE
+  CANCELADO
+}
+
+enum canal_pedido {
+  APP
+  TOTEM
+  BALCAO
+  PICKUP
+  WEB
+}
+
+enum pagamento_status {
+  PENDENTE
+  APROVADO
+  RECUSADO
+}
+
+enum pagamento_metodo {
+  PIX
+  DEBITO
+  CREDITO
+}
+
+enum tipo_pontos {
+  DEBITO
+  CREDITO
+}
+
+enum fidelidade_status {
+  DISPONIVEL
+  VINCULADO
+  UTILIZADO
+  EXPIRADO
+}
+
+enum origem {
+  CLIENTE
+  ESTABELECIMENTO
+  SISTEMA
+}
+
+model Usuario {
+  id               Int             @id @default(autoincrement())
+  nome             String
+  email            String          @unique
+  telefone         String
+  perfil           tipo_usuarios
+  senha_hash       String
+  ativo            Boolean         @default(true)
+  data_registro    DateTime        @default(now())
+  data_atualizacao DateTime        @updatedAt
+  unidade_id       Int?
+  unidade          Unidade?        @relation(fields: [unidade_id], references: [id])
+  pedidos_criado   Pedido[]        @relation("CriadoPor")
+  programa_pontos  ProgramaPontos?
+  cancelamentos    Cancelamento[]
+  pedidos_cliente  Pedido[]        @relation("Cliente")
+
+  @@map("usuario")
+}
+
+model Unidade {
+  id               Int              @id @default(autoincrement())
+  nome             String
+  logradouro       String
+  telefone         String
+  cidade           String
+  estado           String
+  numero           String
+  cep              String
+  ativo            Boolean          @default(true)
+  data_registro    DateTime         @default(now())
+  data_atualizacao DateTime         @updatedAt
+  usuarios         Usuario[]
+  estoque_unidades EstoqueUnidade[]
+  pedidos          Pedido[]
+
+  @@map("unidade")
+}
+
+model Produto {
+  id               Int              @id @default(autoincrement())
+  nome             String
+  descricao        String
+  preco            Decimal          @db.Decimal(10, 2)
+  ativo            Boolean          @default(true)
+  data_registro    DateTime         @default(now())
+  data_atualizacao DateTime         @updatedAt
+  estoque_unidades EstoqueUnidade[]
+  item_pedidos     ItemPedido[]
+
+  @@map("produto")
+}
+
+model EstoqueUnidade {
+  id               Int      @id @default(autoincrement())
+  quantidade       Int
+  disponivel       Boolean  @default(true)
+  data_registro    DateTime @default(now())
+  data_atualizacao DateTime @updatedAt
+  unidade_id       Int
+  unidade          Unidade  @relation(fields: [unidade_id], references: [id])
+  produto_id       Int
+  produto          Produto  @relation(fields: [produto_id], references: [id])
+
+  @@unique([unidade_id, produto_id])
+  @@map("estoque_unidade")
+}
+
+model Pedido {
+  id                   Int                  @id @default(autoincrement())
+  status               tipo_status          @default(AGUARDANDO_PAGAMENTO)
+  canal_pedido         canal_pedido
+  data_registro        DateTime             @default(now())
+  data_atualizacao     DateTime             @updatedAt
+  cliente_id           Int
+  cliente              Usuario              @relation("Cliente", fields: [cliente_id], references: [id])
+  criado_por           Int
+  criado               Usuario              @relation("CriadoPor", fields: [criado_por], references: [id])
+  unidade_id           Int
+  unidade              Unidade              @relation(fields: [unidade_id], references: [id])
+  campanha_id          Int?
+  campanha             Campanha?            @relation(fields: [campanha_id], references: [id])
+  valor_total          Decimal              @db.Decimal(10, 2)
+  item_pedidos         ItemPedido[]
+  pagamentos           Pagamento[]
+  movimentacao_pontos  MovimentacaoPontos[]
+  beneficio_fidelidade BeneficioFidelidade?
+  cancelamento         Cancelamento?
+
+  @@map("pedido")
+}
+
+model ItemPedido {
+  id               Int      @id @default(autoincrement())
+  pedido_id        Int
+  pedido           Pedido   @relation(fields: [pedido_id], references: [id])
+  produto_id       Int
+  produto          Produto  @relation(fields: [produto_id], references: [id])
+  quantidade       Int
+  preco_unitario   Decimal  @db.Decimal(10, 2)
+  data_registro    DateTime @default(now())
+  data_atualizacao DateTime @updatedAt
+
+  @@unique([pedido_id, produto_id])
+  @@map("item_pedido")
+}
+
+model Pagamento {
+  id                  Int              @id @default(autoincrement())
+  pedido_id           Int
+  pedido              Pedido           @relation(fields: [pedido_id], references: [id])
+  status              pagamento_status @default(PENDENTE)
+  valor               Decimal          @db.Decimal(10, 2)
+  metodo              pagamento_metodo
+  identificador_unico String           @unique
+  data_registro       DateTime         @default(now())
+  data_atualizacao    DateTime         @updatedAt
+
+  @@map("pagamento")
+}
+
+model ProgramaPontos {
+  id                    Int                   @id @default(autoincrement())
+  cliente_id            Int                   @unique
+  cliente               Usuario               @relation(fields: [cliente_id], references: [id])
+  saldo_pontos          Int
+  consentimento         Boolean               @default(false)
+  data_registro         DateTime              @default(now())
+  data_atualizacao      DateTime              @updatedAt
+  movimentacao_pontos   MovimentacaoPontos[]
+  beneficio_fidelidades BeneficioFidelidade[]
+
+  @@map("programa_pontos")
+}
+
+model MovimentacaoPontos {
+  id                 Int            @id @default(autoincrement())
+  programa_pontos_id Int
+  programa_pontos    ProgramaPontos @relation(fields: [programa_pontos_id], references: [id])
+  pedido_id          Int
+  pedido             Pedido         @relation(fields: [pedido_id], references: [id])
+  tipo               tipo_pontos
+  data_registro      DateTime       @default(now())
+  data_atualizacao   DateTime       @updatedAt
+  quantidade_pontos  Int
+
+  @@map("movimentacao_pontos")
+}
+
+model BeneficioFidelidade {
+  id                 Int               @id @default(autoincrement())
+  programa_pontos_id Int
+  programa_pontos    ProgramaPontos    @relation(fields: [programa_pontos_id], references: [id])
+  pedido_id          Int?              @unique
+  pedido             Pedido?           @relation(fields: [pedido_id], references: [id])
+  status             fidelidade_status @default(DISPONIVEL)
+  valor_maximo       Decimal           @db.Decimal(10, 2)
+  valor_utilizado    Decimal?          @db.Decimal(10, 2)
+  data_liberacao     DateTime          @default(now())
+  data_expiracao     DateTime
+  data_utilizacao    DateTime?
+  data_registro      DateTime          @default(now())
+  data_atualizacao   DateTime          @updatedAt
+
+  @@map("beneficio_fidelidade")
+}
+
+model Cancelamento {
+  id               Int      @id @default(autoincrement())
+  pedido_id        Int      @unique
+  pedido           Pedido   @relation(fields: [pedido_id], references: [id])
+  usuario_id       Int?
+  usuario          Usuario? @relation(fields: [usuario_id], references: [id])
+  origem           origem
+  motivo           String
+  data_registro    DateTime @default(now())
+  data_atualizacao DateTime @updatedAt
+
+  @@map("cancelamento")
+}
+
+model Campanha {
+  id                  Int      @id @default(autoincrement())
+  nome                String
+  descricao           String
+  percentual_desconto Decimal  @db.Decimal(10, 2)
+  data_inicio         DateTime
+  data_fim            DateTime
+  data_registro       DateTime @default(now())
+  data_atualizacao    DateTime @updatedAt
+  ativo               Boolean  @default(true)
+  pedidos             Pedido[]
+
+  @@map("campanha")
+}
