@@ -8,7 +8,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { UnitStockUpdateDto } from 'src/application/unitStock/dto/unitStockUpdate.dto';
-import { UnitStockDto } from 'src/application/unitStock/dto/unitStock.dto';
+import { UnitRequestStockDto } from 'src/application/unitStock/dto/unitRequestStock.dto';
 import { UnitStockService } from 'src/application/unitStock/unitStock.service';
 
 @Controller('estoque')
@@ -16,7 +16,7 @@ export class UnitStockController {
   constructor(private readonly unitStockService: UnitStockService) {}
 
   @Post()
-  create(@Body() dto: UnitStockDto) {
+  create(@Body() dto: UnitRequestStockDto) {
     return this.unitStockService.create(dto);
   }
 
