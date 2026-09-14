@@ -1,0 +1,7 @@
+export enum TypeUser {
+  ADMIN = 'ADMIN',
+  CLIENTE = 'CLIENTE',
+  ATENDENTE = 'ATENDENTE',
+  COZINHA = 'COZINHA',
+  GERENTE = 'GERENTE',
+}
