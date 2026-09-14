@@ -1,0 +1,16 @@
+export enum TypeStatus {
+  AGUARDANDO_PAGAMENTO = 'AGUARDANDO_PAGAMENTO',
+  CONFIRMADO = 'CONFIRMADO',
+  EM_PREPARO = 'EM_PREPARO',
+  PRONTO = 'PRONTO',
+  ENTREGUE = 'ENTREGUE',
+  CANCELADO = 'CANCELADO',
+}
+
+export enum OrderChannel {
+  APP = 'APP',
+  TOTEM = 'TOTEM',
+  BALCAO = 'BALCAO',
+  PICKUP = 'PICKUP',
+  WEB = 'WEB',
+}
