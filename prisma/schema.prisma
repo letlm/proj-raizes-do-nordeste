@@ -32,7 +32,6 @@ enum OrderChannel {
   APP
   TOTEM
   BALCAO
-  PICKUP
   WEB
 
   @@map("canal_pedido")

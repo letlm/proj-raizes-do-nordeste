@@ -1,10 +1,9 @@
-import { OrderChannel } from '../enums/order';
-import { TypeStatus } from '../enums/order';
+import { OrderChannel, OrderStatus } from '../enums/order';
 import { OrderInterface } from '../interfaces/order.interface';
 
 export class Order {
   public readonly id: number | null;
-  public status: TypeStatus;
+  public status: OrderStatus;
   public orderChannel: OrderChannel;
   public customerId: number;
   public createdById: number;

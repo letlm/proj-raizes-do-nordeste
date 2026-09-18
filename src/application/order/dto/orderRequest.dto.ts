@@ -1,12 +1,19 @@
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
-import { OrderChannel, TypeStatus } from 'src/domain/enums/order';
+import {
+  ArrayMinSize,
+  IsArray,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  ValidateNested,
+} from 'class-validator';
+import { OrderChannel } from 'src/domain/enums/order';
+import { Type } from 'class-transformer';
+import { ItemRequestDto } from '../item/itemRequest.dto';
 
 export class OrderRequestDto {
-  @IsEnum(TypeStatus)
-  status: string;
-
   @IsEnum(OrderChannel)
-  orderChannel: string;
+  orderChannel: OrderChannel;
 
   @IsNumber()
   @IsNotEmpty()
@@ -24,7 +31,9 @@ export class OrderRequestDto {
   @IsOptional()
   campaignId?: number;
 
-  @IsNumber()
-  @IsNotEmpty()
-  totalValue: number;
+  @IsArray()
+  @ValidateNested({ each: true })
+  @ArrayMinSize(1)
+  @Type(() => ItemRequestDto)
+  items: ItemRequestDto[];
 }

@@ -1,14 +1,14 @@
 import { IsEnum, IsNumber, IsOptional } from 'class-validator';
-import { OrderChannel, TypeStatus } from 'src/domain/enums/order';
+import { OrderChannel, OrderStatus } from 'src/domain/enums/order';
 
 export class OrderUpdateDto {
-  @IsEnum(TypeStatus)
+  @IsEnum(OrderStatus)
   @IsOptional()
-  status?: string;
+  status?: OrderStatus;
 
   @IsEnum(OrderChannel)
   @IsOptional()
-  orderChannel?: string;
+  orderChannel?: OrderChannel;
 
   @IsNumber()
   @IsOptional()

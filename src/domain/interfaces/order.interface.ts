@@ -1,7 +1,7 @@
-import { OrderChannel, TypeStatus } from '../enums/order';
+import { OrderChannel, OrderStatus } from '../enums/order';
 
 export interface OrderInterface {
-  status: TypeStatus;
+  status: OrderStatus;
   orderChannel: OrderChannel;
   customerId: number;
   createdById: number;
