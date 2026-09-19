@@ -8,6 +8,8 @@ import { UserModule } from './api/modules/user.module';
 import { UnitModule } from './api/modules/unit.module';
 import { ProductModule } from './api/modules/product.module';
 import { UnitStockModule } from './api/modules/unitStock.module';
+import { OrderModule } from './api/modules/order.module';
+import { PaymentModule } from './api/modules/payment.module';
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { UnitStockModule } from './api/modules/unitStock.module';
     UnitModule,
     ProductModule,
     UnitStockModule,
+    OrderModule,
+    PaymentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

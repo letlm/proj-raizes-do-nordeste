@@ -8,8 +8,14 @@ export abstract class UnitStockRepository {
   abstract findAll(): Promise<UnitStock[]>;
 
   abstract update(unitStock: UnitStock): Promise<UnitStock>;
+
   abstract findByProductAndUnit(
     productId: number,
     unitId: number,
   ): Promise<UnitStock | null>;
+
+  abstract updateQuantityUnitStockById(
+    id: number,
+    quantity: number,
+  ): Promise<void>;
 }

@@ -55,4 +55,18 @@ export class UnitStockPrismaRepository extends UnitStockRepository {
 
     return UnitStockPrismaMapper.toDomain(unitStock);
   }
+
+  async updateQuantityUnitStockById(
+    id: number,
+    quantity: number,
+  ): Promise<void> {
+    await this.prisma.unitStock.update({
+      where: { id },
+      data: {
+        quantity: {
+          decrement: quantity,
+        },
+      },
+    });
+  }
 }

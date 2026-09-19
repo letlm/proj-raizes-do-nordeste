@@ -162,7 +162,7 @@ export class OrderService {
 
     return orders.map((order) => order);
   }
-
+  /*
   async update(id: number, dto: OrderUpdateDto): Promise<Order> {
     const order = await this.repository.findById(id);
 
@@ -202,5 +202,5 @@ export class OrderService {
       order.totalValue = dto.totalValue;
     }
     return await this.repository.update(id, order);
-  }
+  }*/
 }
