@@ -3,6 +3,7 @@ import { UnitStockRepository } from 'src/domain/repositories/unitStock.repositor
 import { PrismaService } from '../prisma.service';
 import { UnitStock } from 'src/domain/entities/unitStock.entity';
 import { UnitStockPrismaMapper } from '../mappers/unitStockPrisma.mapper';
+import { MenuByUnitInterface } from 'src/domain/interfaces/menuByUnit.interface';
 
 @Injectable()
 export class UnitStockPrismaRepository extends UnitStockRepository {
@@ -45,6 +46,30 @@ export class UnitStockPrismaRepository extends UnitStockRepository {
     return unitStocks.map(UnitStockPrismaMapper.toDomain);
   }
 
+  async findProductsForMenuByUnitId(
+    unitId: number,
+  ): Promise<MenuByUnitInterface[]> {
+    const products = await this.prisma.unitStock.findMany({
+      where: { unitId },
+      include: {
+        product: true,
+      },
+    });
+
+    const result = products.map((product) => ({
+      quantity: product.quantity,
+      available: product.available,
+      product: {
+        name: product.product.name,
+        description: product.product.description,
+        price: product.product.price.toNumber(),
+        active: product.product.active,
+      },
+    }));
+
+    return result;
+  }
+
   async update(unitStockUpdate: UnitStock): Promise<UnitStock> {
     const unitStock = await this.prisma.unitStock.update({
       where: {
@@ -65,6 +90,20 @@ export class UnitStockPrismaRepository extends UnitStockRepository {
       data: {
         quantity: {
           decrement: quantity,
+        },
+      },
+    });
+  }
+
+  async updateQuantityUnitStockByIdAfterCancel(
+    id: number,
+    quantity: number,
+  ): Promise<void> {
+    await this.prisma.unitStock.update({
+      where: { id },
+      data: {
+        quantity: {
+          increment: quantity,
         },
       },
     });

@@ -9,7 +9,6 @@ export class UnitRequestDto {
 
   @ApiProperty({
     example: 'Rua da Unidade',
-    required: false,
   })
   @IsString()
   @IsNotEmpty()

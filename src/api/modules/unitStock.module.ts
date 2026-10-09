@@ -10,7 +10,7 @@ import { UnitPrismaRepository } from 'src/infra/database/prisma/repositories/uni
 
 @Module({
   controllers: [UnitStockController],
-
+  exports: [UnitStockService],
   providers: [
     UnitStockService,
     {

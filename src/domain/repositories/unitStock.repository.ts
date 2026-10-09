@@ -1,4 +1,5 @@
 import { UnitStock } from '../entities/unitStock.entity';
+import { MenuByUnitInterface } from '../interfaces/menuByUnit.interface';
 
 export abstract class UnitStockRepository {
   abstract create(unitStock: UnitStock): Promise<UnitStock>;
@@ -14,7 +15,16 @@ export abstract class UnitStockRepository {
     unitId: number,
   ): Promise<UnitStock | null>;
 
+  abstract findProductsForMenuByUnitId(
+    unitId: number,
+  ): Promise<MenuByUnitInterface[]>;
+
   abstract updateQuantityUnitStockById(
+    id: number,
+    quantity: number,
+  ): Promise<void>;
+
+  abstract updateQuantityUnitStockByIdAfterCancel(
     id: number,
     quantity: number,
   ): Promise<void>;
