@@ -1,13 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsEmail,
-  IsEnum,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-} from 'class-validator';
-import { TypeUser } from 'src/domain/enums/user.enum';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 export class UserRequestDto {
   @ApiProperty({ example: 'Nome e Sobrenome' })
@@ -25,24 +17,9 @@ export class UserRequestDto {
   phone: string;
 
   @ApiProperty({
-    enum: TypeUser,
-    example: TypeUser.CLIENTE,
-  })
-  @IsEnum(TypeUser)
-  profile: TypeUser;
-
-  @ApiProperty({
     example: 'Senha@123',
   })
   @IsString()
   @IsNotEmpty()
   password: string;
-
-  @ApiProperty({
-    example: 1,
-    required: false,
-  })
-  @IsOptional()
-  @IsNumber()
-  unitId?: number;
 }

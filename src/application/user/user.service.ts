@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   ConflictException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -13,6 +14,8 @@ import { UserResponseMapper } from './mappers/userResponse.mapper';
 import { UserResponseDto } from './dto/userResponse.dto';
 import { UnitRepository } from 'src/domain/repositories/unit.repository';
 import { UserUpdateDto } from './dto/userUpdate.dto';
+import { EmployeeRequestDto } from './dto/employeeRequest.dto';
+import { AuthenticatedInterface } from '../authentication/interfaces/authenticated.interface';
 
 @Injectable()
 export class UserService {
@@ -22,6 +25,31 @@ export class UserService {
   ) {}
 
   async create(dto: UserRequestDto): Promise<UserResponseDto> {
+    await this.validEmailAvailable(dto.email);
+
+    const passHash = await this.createHashPassword(dto.password);
+
+    const user = new User({
+      name: dto.name,
+      email: dto.email,
+      phone: dto.phone,
+      profile: TypeUser.CLIENTE,
+      passHash: passHash,
+      unitId: null,
+    });
+
+    const newUser = await this.repository.create(user);
+
+    return UserResponseMapper.userResponse(newUser);
+  }
+
+  async createEmployee(dto: EmployeeRequestDto): Promise<UserResponseDto> {
+    if (dto.profile === TypeUser.CLIENTE) {
+      throw new BadRequestException(
+        'Não é possível cadastrar esse tipo de usuário neste endpoint.',
+      );
+    }
+
     await this.validEmailAvailable(dto.email);
 
     this.validUnitAndProfileCombination(dto.profile, dto.unitId);
@@ -62,7 +90,24 @@ export class UserService {
     return users.map((user) => UserResponseMapper.userResponse(user));
   }
 
-  async update(id: number, dto: UserUpdateDto): Promise<UserResponseDto> {
+  async update(
+    id: number,
+    dto: UserUpdateDto,
+    requestUser: AuthenticatedInterface,
+  ): Promise<UserResponseDto> {
+    if (requestUser.profile === TypeUser.CLIENTE && requestUser.id !== id) {
+      throw new ForbiddenException('Você não pode atualizar esse usuário.');
+    }
+
+    if (
+      requestUser.profile === TypeUser.CLIENTE &&
+      (dto.profile !== undefined || dto.unitId !== undefined)
+    ) {
+      throw new ForbiddenException(
+        'Você não pode realizar esse tipo de alteração.',
+      );
+    }
+
     const user = await this.repository.findById(id);
 
     if (!user) {
