@@ -1,0 +1,2847 @@
+{
+  "info": {
+    "_postman_id": "6bbd1937-9391-403d-82fa-b4c00d2faeeb",
+    "name": "raizes-nordeste",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "17572717"
+  },
+  "item": [
+    {
+      "name": "endpoints",
+      "item": [
+        {
+          "name": "01 - AUTH",
+          "item": [
+            {
+              "name": "[200 - SUCESSO] Login admin",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const response = pm.response.json();\r\n\r\npm.collectionVariables.set(\"accessToken\", response.accessToken);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"email\": \"admin.da.api@teste.com\",\r\n  \"password\": \"teste123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO ] Login cliente",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const response = pm.response.json();\r\n\r\npm.collectionVariables.set(\"clientToken\", response.accessToken);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"email\": \"cliente.senha@example.com\",\r\n  \"password\": \"123456\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO ] Login cozinha",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const response = pm.response.json();\r\n\r\npm.collectionVariables.set(\"kitchenToken\", response.accessToken);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"email\": \"funcionario.cozinha@email.com\",\r\n  \"password\": \"Senha@123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO ] Login atendente",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const response = pm.response.json();\r\n\r\npm.collectionVariables.set(\"attendantToken\", response.accessToken);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"email\": \"funcionario.atendente@email.com\",\r\n  \"password\": \"Senha@123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "02 - USUÁRIOS",
+          "item": [
+            {
+              "name": "[201 - SUCESSO] Cadastrar cliente",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Cliente teste\",\r\n  \"email\": \"cliente.senha@example.com\",\r\n  \"phone\": \"81999990012\",\r\n  \"password\": \"123456\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/usuarios",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "usuarios"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[400 - NÃO SUCESSO] Cadastrar cliente - formato inválido",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Cliente teste\",\r\n  \"email\": \"email-invalido\",\r\n  \"phone\": \"81999990012\",\r\n  \"password\": \"123456\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/usuarios",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "usuarios"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[201 - SUCESSO ] cadastrar funcionário - cozinha",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Funcionario Cozinha\",\r\n  \"email\": \"funcionario.cozinha@email.com\",\r\n  \"phone\": \"99999999999\",\r\n  \"profile\": \"COZINHA\",\r\n  \"password\": \"Senha@123\",\r\n  \"unitId\": {{unitId}}\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/usuarios/funcionarios",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "usuarios",
+                    "funcionarios"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[201 - SUCESSO ] cadastrar funcionário - atendente",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Funcionario Atendente\",\r\n  \"email\": \"funcionario.atendente@email.com\",\r\n  \"phone\": \"99999999999\",\r\n  \"profile\": \"ATENDENTE\",\r\n  \"password\": \"Senha@123\",\r\n  \"unitId\": {{unitId}}\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/usuarios/funcionarios",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "usuarios",
+                    "funcionarios"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO ] Listar todos os usuários",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/usuarios",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "usuarios"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO ] Buscar usuário por ID",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/usuarios/3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "usuarios",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO ] Atualizar usuário por id",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Cliente nome atualizando\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/usuarios/3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "usuarios",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "03 - UNIDADES",
+          "item": [
+            {
+              "name": "[201 - SUCESSO] Criar unidade",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const response = pm.response.json();\r\n\r\npm.collectionVariables.set(\"unitId\", response.id);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Unidade Sucesso\",\r\n  \"street\": \"Rua Sucesso\",\r\n  \"phone\": \"81999990011\",\r\n  \"city\": \"Recife\",\r\n  \"state\": \"PE\",\r\n  \"number\": \"11\",\r\n  \"zipCode\": \"50000001\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/unidades",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "unidades"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[401 - NÃO SUCESSO] Criar unidade - sem autenticação",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Nome da unidade\",\r\n  \"street\": \"Rua Teste\",\r\n  \"phone\": \"81999990000\",\r\n  \"city\": \"Recife\",\r\n  \"state\": \"PE\",\r\n  \"number\": \"10\",\r\n  \"zipCode\": \"50000000\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/unidades",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "unidades"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[403 - NÃO SUCESSO] Criar unidade - usuário sem permissão",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{clientToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Nome da unidade\",\r\n  \"street\": \"Rua Teste\",\r\n  \"phone\": \"81999990000\",\r\n  \"city\": \"Recife\",\r\n  \"state\": \"PE\",\r\n  \"number\": \"10\",\r\n  \"zipCode\": \"50000000\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/unidades",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "unidades"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Listar todas as unidades",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/unidades",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "unidades"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Listar unidade por id",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/unidades/2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "unidades",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Listar cardapio da unidade por id",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/unidades/2/cardapio",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "unidades",
+                    "2",
+                    "cardapio"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Atualizar unidade por id",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"Unidade Pelotas da Alegria\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/unidades/3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "unidades",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "04 - PRODUTOS",
+          "item": [
+            {
+              "name": "[201 - SUCESSO] Criar produto",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Pão de queijo da vovó\",\r\n  \"description\": \"Porção individual\",\r\n  \"price\": 13.25\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/produtos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "produtos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Listar todos os produtos",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/produtos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "produtos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Listar produto por id",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/produtos/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "produtos",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Atualizar produto por id",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"price\": 18.99\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/produtos/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "produtos",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "05 - ESTOQUE",
+          "item": [
+            {
+              "name": "[201 - SUCESSO] Cadastrar estoque",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"quantity\": 50,\r\n  \"available\": true,\r\n  \"unitId\": {{unitId}},\r\n  \"productId\": {{productId}}\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/estoque",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "estoque"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Listar todos os estoques",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/estoque",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "estoque"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Buscar estoque por id",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/estoque/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "estoque",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Atualizar estoque por id",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"quantity\": 100\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/estoque/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "estoque",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "06 - PEDIDOS",
+          "item": [
+            {
+              "name": "[201 - SUCESSO] Criar pedido",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{clientToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"orderChannel\": \"WEB\",\r\n  \"customerId\": {{clientId}},\r\n  \"unitId\": {{unitId}},\r\n  \"items\": [\r\n    {\r\n      \"productId\": {{productId}},\r\n      \"quantity\": 3\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[400 - NÃO SUCESSO] Criar pedido - estoque insuficiente",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{clientToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"orderChannel\": \"APP\",\r\n  \"customerId\": {{clientId}},\r\n  \"unitId\": {{unitId}},\r\n  \"items\": [\r\n    {\r\n      \"productId\": {{productId}},\r\n      \"quantity\": 100\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[404 - NÃO SUCESSO] Criar pedido - produto inexistente",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{clientToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"orderChannel\": \"APP\",\r\n  \"customerId\": {{clientId}},\r\n  \"unitId\": {{unitId}},\r\n  \"items\": [\r\n    {\r\n      \"productId\": 9999,\r\n      \"quantity\": 2\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[400 - NÃO SUCESSO] Criar pedido - campo ausente",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{clientToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"customerId\": {{clientId}},\r\n  \"unitId\": {{unitId}},\r\n  \"items\": [\r\n    {\r\n      \"productId\": {{productId}},\r\n      \"quantity\": 2\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Listar pedido por id",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos/{{orderId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos",
+                    "{{orderId}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Listar todos os pedidos",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Listar pedido por id - pagamento recusado",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos/{{rejectedOrderId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos",
+                    "{{rejectedOrderId}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Listar pedido por id - pedido cancelado",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos/{{orderCancelId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos",
+                    "{{orderCancelId}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Listar pedidos por filtro de canal",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos?canalPedido=APP",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos"
+                  ],
+                  "query": [
+                    {
+                      "key": "canalPedido",
+                      "value": "APP"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "07 - PAGAMENTO",
+          "item": [
+            {
+              "name": "[201 - SUCESSO] Pagamento aprovado",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{clientToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"orderId\": {{orderId}},\r\n  \"method\": \"PIX\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pagamento",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pagamento"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[201 - SUCESSO] Pagamento recusado",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{clientToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"orderId\": {{rejectedOrderId}},\r\n  \"method\": \"DEBITO\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pagamento",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pagamento"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Listar todos os pagamentos",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pagamento",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pagamento"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Listar pagamento por id",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pagamento/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pagamento",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "08 - STATUS DO PEDIDO",
+          "item": [
+            {
+              "name": "[200 - SUCESSO] Atualizar para EM_PREPARO",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{kitchenToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"status\": \"EM_PREPARO\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos/{{orderId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos",
+                    "{{orderId}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Atualizar para PRONTO",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{kitchenToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"status\": \"PRONTO\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos/{{orderId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos",
+                    "{{orderId}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Atualizar para ENTREGUE",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{attendantToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"status\": \"ENTREGUE\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos/{{orderId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos",
+                    "{{orderId}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "09 - CANCELAMENTO",
+          "item": [
+            {
+              "name": "[201 - SUCESSO] Cancelar pedido",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{clientToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"orderId\": {{orderCancelId}},\r\n  \"reason\": \"Cancelamento solicitado pelo cliente\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/cancelamentos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "cancelamentos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Listar todos os cancelamentos",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/cancelamentos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "cancelamentos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Buscar cancelamento por id",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/cancelamentos/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "cancelamentos",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "testes",
+      "item": [
+        {
+          "name": "1. Preparação dos dados",
+          "item": [
+            {
+              "name": "[200 - SUCESSO] Login ADMIN",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const response = pm.response.json();\r\n\r\npm.collectionVariables.set(\"accessToken\", response.accessToken);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"email\": \"admin.da.api@teste.com\",\r\n  \"password\": \"teste123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[201 - SUCESSO] Criar uma unidade",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const response = pm.response.json();\r\n\r\npm.collectionVariables.set(\"unitId\", response.id);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Unidade Sucesso\",\r\n  \"street\": \"Rua Sucesso\",\r\n  \"phone\": \"81999990011\",\r\n  \"city\": \"Recife\",\r\n  \"state\": \"PE\",\r\n  \"number\": \"11\",\r\n  \"zipCode\": \"50000001\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/unidades",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "unidades"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[201 - SUCESSO] Criar um produto",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Pão de queijo da vovó\",\r\n  \"description\": \"Porção individual\",\r\n  \"price\": 13.25\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/produtos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "produtos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[201 - SUCESSO ] Cadastro de funcionário COZINHA",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Funcionario Cozinha\",\r\n  \"email\": \"funcionario.cozinha@email.com\",\r\n  \"phone\": \"99999999999\",\r\n  \"profile\": \"COZINHA\",\r\n  \"password\": \"Senha@123\",\r\n  \"unitId\": {{unitId}}\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/usuarios/funcionarios",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "usuarios",
+                    "funcionarios"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[201 - SUCESSO ] Cadastro de funcionário ATENDENTE",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Funcionario Atendente\",\r\n  \"email\": \"funcionario.atendente@email.com\",\r\n  \"phone\": \"99999999999\",\r\n  \"profile\": \"ATENDENTE\",\r\n  \"password\": \"Senha@123\",\r\n  \"unitId\": {{unitId}}\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/usuarios/funcionarios",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "usuarios",
+                    "funcionarios"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO ] Login COZINHA",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const response = pm.response.json();\r\n\r\npm.collectionVariables.set(\"kitchenToken\", response.accessToken);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"email\": \"funcionario.cozinha@email.com\",\r\n  \"password\": \"Senha@123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO ] Login ATENDENTE",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const response = pm.response.json();\r\n\r\npm.collectionVariables.set(\"attendantToken\", response.accessToken);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"email\": \"funcionario.atendente@email.com\",\r\n  \"password\": \"Senha@123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[201 - SUCESSO] Cadastro de CLIENTE",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Cliente teste\",\r\n  \"email\": \"cliente.teste@email.com\",\r\n  \"phone\": \"81999990012\",\r\n  \"password\": \"123456\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/usuarios",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "usuarios"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO ] Login CLIENTE",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const response = pm.response.json();\r\n\r\npm.collectionVariables.set(\"clientToken\", response.accessToken);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"email\": \"cliente.teste@email.com\",\r\n  \"password\": \"123456\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[201 - SUCESSO] Cadastro de estoque do produto",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"quantity\": 50,\r\n  \"available\": true,\r\n  \"unitId\": {{unitId}},\r\n  \"productId\": {{productId}}\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/estoque",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "estoque"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Listar cardapio da unidade por id",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/unidades/{{unitId}}/cardapio",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "unidades",
+                    "{{unitId}}",
+                    "cardapio"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "2. Cenário de pedido com pagamento aprovado",
+          "item": [
+            {
+              "name": "[201 - SUCESSO] Criação de pedido",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{clientToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"orderChannel\": \"WEB\",\r\n  \"customerId\": {{clientId}},\r\n  \"unitId\": {{unitId}},\r\n  \"items\": [\r\n    {\r\n      \"productId\": {{productId}},\r\n      \"quantity\": 3\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[201 - SUCESSO] Pagamento de pedido aprovado",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{clientToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"orderId\": {{orderId}},\r\n  \"method\": \"PIX\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pagamento",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pagamento"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Consultar pedido por ID - verificar status CONFIRMADO",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos/{{orderId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos",
+                    "{{orderId}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Atualizar pedido para EM_PREPARO",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{kitchenToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"status\": \"EM_PREPARO\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos/{{orderId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos",
+                    "{{orderId}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Consultar pedido por ID - verificar status EM_PREPARO",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos/{{orderId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos",
+                    "{{orderId}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Atualizar pedido para PRONTO",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{kitchenToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"status\": \"PRONTO\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos/{{orderId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos",
+                    "{{orderId}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Consultar pedido por ID - verificar status PRONTO",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos/{{orderId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos",
+                    "{{orderId}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Atualizar pedido para ENTREGUE",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{attendantToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"status\": \"ENTREGUE\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos/{{orderId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos",
+                    "{{orderId}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Consultar pedido por id - verificar status ENTREGUE",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos/{{orderId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos",
+                    "{{orderId}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "3. Cenário de pedido com pagamento recusado",
+          "item": [
+            {
+              "name": "[201 - SUCESSO] Criação de pedido",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{clientToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"orderChannel\": \"APP\",\r\n  \"customerId\": {{clientId}},\r\n  \"unitId\": {{unitId}},\r\n  \"items\": [\r\n    {\r\n      \"productId\": {{productId}},\r\n      \"quantity\": 5\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[201 - SUCESSO] Pagamento de pedido recusado",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{clientToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"orderId\": {{rejectedOrderId}},\r\n  \"method\": \"DEBITO\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pagamento",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pagamento"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Listar pedidos por filtro de canal",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos?canalPedido=APP",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos"
+                  ],
+                  "query": [
+                    {
+                      "key": "canalPedido",
+                      "value": "APP"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Consultar pedido por id - verificar status AGUARDANDO_PAGAMENTO",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos/{{rejectedOrderId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos",
+                    "{{rejectedOrderId}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "4. Cenário de cancelamento de pedido",
+          "item": [
+            {
+              "name": "[201 - SUCESSO] Criação de pedido",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{clientToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"orderChannel\": \"WEB\",\r\n  \"customerId\": {{clientId}},\r\n  \"unitId\": {{unitId}},\r\n  \"items\": [\r\n    {\r\n      \"productId\": {{productId}},\r\n      \"quantity\": 1\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[201 - SUCESSO] Cancelamento de pedido",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{clientToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"orderId\": {{orderCancelId}},\r\n  \"reason\": \"Cancelamento solicitado pelo cliente\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/cancelamentos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "cancelamentos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[200 - SUCESSO] Consultar pedido por id - verificar status CANCELADO",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{accessToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos/{{orderCancelId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos",
+                    "{{orderCancelId}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "5. Cenário de testes negativos",
+          "item": [
+            {
+              "name": "[400 - NÃO SUCESSO] Cadastrar cliente com formato inválido",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Cliente teste\",\r\n  \"email\": \"email-invalido\",\r\n  \"phone\": \"81999990012\",\r\n  \"password\": \"123456\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/usuarios",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "usuarios"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[401 - NÃO SUCESSO] Criar unidade sem autenticação",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Nome da unidade\",\r\n  \"street\": \"Rua Teste\",\r\n  \"phone\": \"81999990000\",\r\n  \"city\": \"Recife\",\r\n  \"state\": \"PE\",\r\n  \"number\": \"10\",\r\n  \"zipCode\": \"50000000\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/unidades",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "unidades"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[403 - NÃO SUCESSO] Criar unidade usuário sem permissão",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{clientToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Nome da unidade\",\r\n  \"street\": \"Rua Teste\",\r\n  \"phone\": \"81999990000\",\r\n  \"city\": \"Recife\",\r\n  \"state\": \"PE\",\r\n  \"number\": \"10\",\r\n  \"zipCode\": \"50000000\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/unidades",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "unidades"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[400 - NÃO SUCESSO] Criar pedido com estoque insuficiente do produto",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{clientToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"orderChannel\": \"APP\",\r\n  \"customerId\": {{clientId}},\r\n  \"unitId\": {{unitId}},\r\n  \"items\": [\r\n    {\r\n      \"productId\": {{productId}},\r\n      \"quantity\": 100\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[404 - NÃO SUCESSO] Criar pedido com produto inexistente",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{clientToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"orderChannel\": \"APP\",\r\n  \"customerId\": {{clientId}},\r\n  \"unitId\": {{unitId}},\r\n  \"items\": [\r\n    {\r\n      \"productId\": 9999,\r\n      \"quantity\": 2\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[400 - NÃO SUCESSO] Criar pedido com campo ausente",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{clientToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"customerId\": {{clientId}},\r\n  \"unitId\": {{unitId}},\r\n  \"items\": [\r\n    {\r\n      \"productId\": {{productId}},\r\n      \"quantity\": 2\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pedidos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pedidos"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": ""
+    },
+    {
+      "key": "accessToken",
+      "value": ""
+    },
+    {
+      "key": "clientToken",
+      "value": ""
+    },
+    {
+      "key": "unitId",
+      "value": ""
+    },
+    {
+      "key": "productId",
+      "value": ""
+    },
+    {
+      "key": "clientId",
+      "value": ""
+    },
+    {
+      "key": "orderId",
+      "value": ""
+    },
+    {
+      "key": "rejectedOrderId",
+      "value": ""
+    },
+    {
+      "key": "kitchenToken",
+      "value": ""
+    },
+    {
+      "key": "attendantToken",
+      "value": ""
+    },
+    {
+      "key": "orderCancelId",
+      "value": ""
+    }
+  ]
+}
