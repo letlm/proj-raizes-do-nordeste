@@ -6,17 +6,23 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import {
+  ApiBearerAuth,
   ApiBody,
   ApiOperation,
   ApiParam,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/application/authentication/guards/jwt.auth.guard';
+import { RolesGuard } from 'src/application/authentication/guards/roles.guard';
+import { Roles } from 'src/application/decorators/roles.decorator';
 import { ProductRequestDto } from 'src/application/product/dto/productRequest.dto';
 import { ProductUpdateDto } from 'src/application/product/dto/productUpdate.dto';
 import { ProductService } from 'src/application/product/product.service';
+import { TypeUser } from 'src/domain/enums/user.enum';
 
 @ApiTags('Produtos')
 @Controller('produtos')
@@ -24,6 +30,9 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @Post()
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(TypeUser.ADMIN, TypeUser.GERENTE)
   @ApiOperation({ summary: 'Criar um produto' })
   @ApiBody({ type: ProductRequestDto })
   @ApiResponse({
@@ -33,6 +42,14 @@ export class ProductController {
   @ApiResponse({
     status: 400,
     description: 'Dados inválidos.',
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Usuário não autenticado',
+  })
+  @ApiResponse({
+    status: 403,
+    description: 'Usuário não autorizado.',
   })
   create(@Body() dto: ProductRequestDto) {
     return this.productService.create(dto);
@@ -73,6 +90,9 @@ export class ProductController {
   }
 
   @Patch(':id')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(TypeUser.ADMIN, TypeUser.GERENTE)
   @ApiOperation({ summary: 'Atualizar um produto' })
   @ApiParam({
     name: 'id',
@@ -92,6 +112,14 @@ export class ProductController {
   @ApiResponse({
     status: 400,
     description: 'Dados inválidos.',
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Usuário não autenticado',
+  })
+  @ApiResponse({
+    status: 403,
+    description: 'Usuário não autorizado.',
   })
   async update(
     @Param('id', ParseIntPipe) id: number,
