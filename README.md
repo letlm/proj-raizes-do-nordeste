@@ -14,6 +14,22 @@ O fluxo principal do sistema segue a criação do pedido --> pagamento por um mo
 - **Docker Compose**: 5.3.1
 - **PostgreSQL**: 16 (container Docker)
 
+## Instalação
+
+```bash
+# clonar o repositório usando HTTPS
+$ git clone https://github.com/letlm/proj-raizes-do-nordeste.git
+
+# ou clonar o repositório usando chave SSH
+ git clone git@github.com:letlm/proj-raizes-do-nordeste.git
+
+# entrar na pasta em que você clonou o repositório
+$ cd proj-raizes-do-nordeste
+
+# instalar as dependências
+$ npm install
+```
+
 ## Configuração das variáveis de ambiente
 
 Copie o arquivo `.env.example` para `.env` com o seguinte comando `cp .env.example .env` e configure as seguintes variáveis de ambiente:
@@ -32,22 +48,6 @@ $ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 Após a geração, adicione o valor gerado na variável JWT_SECRET no arquivo `.env`
 
 A `ADMIN_PASSWORD` é a senha utilizada para o primeiro usuário ADMIN, você pode escolher uma senha que quiser e adicionar na variável.
-
-## Instalação
-
-```bash
-# clonar o repositório usando HTTPS
-$ git clone https://github.com/letlm/proj-raizes-do-nordeste.git
-
-# ou clonar o repositório usando chave SSH
- git clone git@github.com:letlm/proj-raizes-do-nordeste.git
-
-# entrar na pasta em que você clonou o repositório
-$ cd proj-raizes-do-nordeste
-
-# instalar as dependências
-$ npm install
-```
 
 ## Banco de dados
 
