@@ -32,20 +32,26 @@ $ npm install
 
 ## Configuração das variáveis de ambiente
 
-Copie o arquivo `.env.example` para `.env` com o seguinte comando `cp .env.example .env` e configure as seguintes variáveis de ambiente:
-
+Copie o arquivo `.env.example` para `.env` com o seguinte comando `cp .env.example .env`. O arquivo contém as variáveis de ambiente necessárias para a execução do projeto:
 - `DATABASE_URL`
 - `JWT_SECRET`
 - `ADMIN_PASSWORD`
 
-A `JWT_SECRET` deve ser definida antes da execução do projeto, você pode gerar uma chave aleatória com o seguinte comando:
+A variável `DATABASE_URL` ja está configurada no arquivo .env.example para a conexão com o PostgreSQL executado pelo Docker Compose: 
+`DATABASE_URL='postgresql://postgres:postgres@localhost:5432/raizes_nordeste'`
+
+Caso sejam utilizadas configurações diferentes de usuário, senha, porta ou nome do banco de dados, a variável deverá ser ajustada conforme o ambiente. 
+
+As variáveis `JWT_SECRET` e `ADMIN_PASSWORD`devem ser definidas antes da execução do projeto
+
+Você pode gerar uma chave aleatória para a `JWT_SECRET` com o seguinte comando:
 
 ```bash
 # gerar uma chave para JWT_SECRET
 $ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ```
 
-Após a geração, adicione o valor gerado na variável JWT_SECRET no arquivo `.env`
+Após a geração, adicione o valor gerado na variável `JWT_SECRET` no arquivo `.env`
 
 A `ADMIN_PASSWORD` é a senha utilizada para o primeiro usuário ADMIN, você pode escolher uma senha que quiser e adicionar na variável.
 
