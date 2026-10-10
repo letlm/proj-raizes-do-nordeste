@@ -1,14 +1,12 @@
-import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsEnum, IsOptional } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsEnum } from 'class-validator';
 import { OrderStatus } from 'src/domain/enums/order';
 
 export class OrderUpdateDto {
-  @ApiPropertyOptional({
+  @ApiProperty({
     enum: OrderStatus,
-    example: OrderStatus.CONFIRMADO,
-    required: false,
+    example: OrderStatus.EM_PREPARO,
   })
   @IsEnum(OrderStatus)
-  @IsOptional()
-  status?: OrderStatus;
+  status: OrderStatus;
 }

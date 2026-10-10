@@ -4,6 +4,7 @@ import { OrderRepository } from 'src/domain/repositories/order.repository';
 import { Order } from 'src/domain/entities/order.entity';
 import { OrderPrismaMapper } from '../mappers/orderPrisma.mapper';
 import { OrderItemCreate } from 'src/domain/interfaces/orderItemCreate.interface';
+import { OrderChannel } from 'src/domain/enums/order';
 @Injectable()
 export class OrderPrismaRepository extends OrderRepository {
   constructor(private readonly prisma: PrismaService) {
@@ -35,8 +36,14 @@ export class OrderPrismaRepository extends OrderRepository {
     return order ? OrderPrismaMapper.toDomain(order) : null;
   }
 
-  async findAll(): Promise<Order[]> {
-    const orders = await this.prisma.order.findMany();
+  async findAll(canalPedido?: OrderChannel): Promise<Order[]> {
+    const orders = await this.prisma.order.findMany({
+      where: canalPedido
+        ? {
+            orderChannel: canalPedido,
+          }
+        : undefined,
+    });
 
     return orders.map(OrderPrismaMapper.toDomain);
   }

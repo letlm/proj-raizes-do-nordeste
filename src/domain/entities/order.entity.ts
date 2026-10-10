@@ -8,7 +8,7 @@ export class Order {
   public customerId: number;
   public createdById: number;
   public unitId: number;
-  public campaignId?: number;
+  public campaignId?: number | null;
   public totalValue: number;
 
   constructor(props: OrderInterface, id: number | null = null) {

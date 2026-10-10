@@ -25,11 +25,6 @@ export class OrderRequestDto {
   @IsNotEmpty()
   customerId: number;
 
-  @ApiProperty({ example: 1, description: 'ID de quem está criando o pedido' })
-  @IsNumber()
-  @IsNotEmpty()
-  createdById: number;
-
   @ApiProperty({ example: 1, description: 'ID da unidade' })
   @IsNumber()
   @IsNotEmpty()
