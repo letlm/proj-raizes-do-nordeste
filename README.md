@@ -102,11 +102,13 @@ A Collection utiliza algumas variáveis para armazenar a URL da API, tokens de a
 
 Ao importar a Collection você verá que os tokens de autenticação estarão vazios, porém eles serão preenchidos automaticamente quando as requisições de login de cada um dos usuários forem realizadas.
 
+A variável baseUrl deve estar configurada com o endereço da API. Caso esteja vazia após a importação da Collection, acesse a aba Variables da collection no postmain, localize a variável baseUrl e preencha com `http://localhost:3000`, considerando a execução local da aplicação.
+
 A Collection está organizada em duas pastas: `endpoints`, que contém as requisições disponíveis na API, e `testes`, que reúne cinco cenários descritos abaixo, então poderá utilizar a pasta `testes` para facilitar a reprodução deles..
 
 #### 1. Preparação dos dados
 
-1. Execute o comando `npx prisma db seed`, informado anteriormente, para criar o primeiro usuário ADMIN.
+1. Execute o comando `npx prisma db seed`, informado anteriormente, para criar o primeiro usuário ADMIN. Caso você já tenha executado ele anteriormente na configuração do banco de dados não é necessário executar esse comando novamente.
 2. Realize o login do usuário ADMIN utilizando o email informado neste README e a senha definida anteriormente na variável ADMIN_PASSWORD.
 3. Crie uma unidade e armazene o ID retornado na variável `unitId` da Collection.
 4. Crie um produto e armazene o ID retornado na variável `productId` da Collection.
