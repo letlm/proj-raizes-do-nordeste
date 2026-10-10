@@ -10,6 +10,8 @@ import { ProductModule } from './api/modules/product.module';
 import { UnitStockModule } from './api/modules/unitStock.module';
 import { OrderModule } from './api/modules/order.module';
 import { PaymentModule } from './api/modules/payment.module';
+import { CancellationModule } from './api/modules/cancellation.module';
+import { AuthenticationModule } from './api/modules/authentication.module';
 
 @Module({
   imports: [
@@ -24,6 +26,8 @@ import { PaymentModule } from './api/modules/payment.module';
     UnitStockModule,
     OrderModule,
     PaymentModule,
+    AuthenticationModule,
+    CancellationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
