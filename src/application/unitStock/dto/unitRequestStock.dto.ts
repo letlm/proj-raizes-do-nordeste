@@ -12,12 +12,12 @@ export class UnitRequestStockDto {
   available: boolean;
 
   @ApiProperty({ example: 1, required: false })
-  @IsOptional()
+  @IsNotEmpty()
   @IsNumber()
-  unitId?: number;
+  unitId: number;
 
   @ApiProperty({ example: 1, required: false })
-  @IsOptional()
+  @IsNotEmpty()
   @IsNumber()
-  productId?: number;
+  productId: number;
 }
