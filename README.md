@@ -18,16 +18,16 @@ O fluxo principal do sistema segue a criação do pedido --> pagamento por um mo
 
 ```bash
 # clonar o repositório usando HTTPS
-$ git clone https://github.com/letlm/proj-raizes-do-nordeste.git
+git clone https://github.com/letlm/proj-raizes-do-nordeste.git
 
 # ou clonar o repositório usando chave SSH
- git clone git@github.com:letlm/proj-raizes-do-nordeste.git
+git clone git@github.com:letlm/proj-raizes-do-nordeste.git
 
 # entrar na pasta em que você clonou o repositório
-$ cd proj-raizes-do-nordeste
+cd proj-raizes-do-nordeste
 
 # instalar as dependências
-$ npm install
+npm install
 ```
 
 ## Configuração das variáveis de ambiente
@@ -48,7 +48,7 @@ Você pode gerar uma chave aleatória para a `JWT_SECRET` com o seguinte comando
 
 ```bash
 # gerar uma chave para JWT_SECRET
-$ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ```
 
 Após a geração, adicione o valor gerado na variável `JWT_SECRET` no arquivo `.env`
@@ -61,16 +61,16 @@ O projeto utiliza o PostgreSQL, que é executado através do `docker-compose.yml
 
 ```bash
 # iniciar o container do banco de dados
-$ docker compose up -d
+docker compose up -d
 
 # gerar o Prisma Client
-$ npx prisma generate
+npx prisma generate
 
 # aplicar as migrations
-$ npx prisma migrate deploy
+npx prisma migrate deploy
 
 # criar usuário ADMIN inicial
-$ npx prisma db seed
+npx prisma db seed
 ```
 
 O comando para criar o usuário ADMIN criará o usuário com o seguinte email: admin.da.api@teste.com
@@ -80,7 +80,7 @@ A senha do usuário é o valor que foi adicionado anteriormente a variável `ADM
 
 ```bash
 # iniciar a aplicação em modo de desenvolvimento:
-$ npm run start:dev
+npm run start:dev
 ```
 
 Após a execução a aplicação estará rodando em http://localhost:3000
